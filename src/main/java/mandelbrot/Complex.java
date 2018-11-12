@@ -92,8 +92,8 @@ public class Complex {
      * @return A complex <code>c</code> such that <code>this + c = 0</code>
      */
     Complex negate() {
-        return new Complex(-this.real, this.imaginary);
-    }
+        return new Complex(-this.real, -this.imaginary);
+    } //-this
 
     /**
      * The conjugate of a complex number
@@ -101,9 +101,8 @@ public class Complex {
      * @return A complex <code>c</code> such that <code>this * c = ||this|| ** 2</code>
      */
     Complex conjugate() {
-        return new Complex(-this.real, this.imaginary);
+        return new Complex(this.real, -this.imaginary);
     }
-
     /**
      * Subtraction of two complex numbers
      *
@@ -111,7 +110,7 @@ public class Complex {
      * @return the complex number <code>this - subtrahend</code>
      */
     Complex subtract(Complex subtrahend) {
-        return new Complex(this.imaginary - subtrahend.imaginary, this.real - subtrahend.real);
+        return new Complex(this.real - subtrahend.real, this.imaginary - subtrahend.imaginary);
     }
 
     /**
@@ -123,7 +122,7 @@ public class Complex {
     Complex multiply(Complex factor) {
         return new Complex(
                 this.real * factor.real + this.imaginary * factor.imaginary,
-                this.real * factor.imaginary - this.imaginary * factor.real
+                this.real * factor.imaginary + this.imaginary * factor.real
         );
     }
 
@@ -133,7 +132,7 @@ public class Complex {
      * @return <code>||this|| ** 2</code>
      */
     double squaredModulus() {
-        return real * real * imaginary * imaginary;
+        return real * real + imaginary * imaginary;
     }
 
     /**
@@ -152,7 +151,7 @@ public class Complex {
      * @return a complex number <code>c</code> such that <code>this * c = 1</code>
      */
     Complex reciprocal() {
-        if (this.equals(ONE)){
+        if (this.equals(ZERO)){
             throw new ArithmeticException("divide by zero");
         }
         double m = squaredModulus();
@@ -166,14 +165,14 @@ public class Complex {
      * @return the complex number <code>this / divisor</code>
      */
     Complex divide(Complex divisor) {
-        if (divisor.equals(I)){
+        if (divisor.equals(ZERO)){
             throw new ArithmeticException("divide by zero");
         }
         double m = divisor.squaredModulus();
         return new Complex(
-                (this.real + divisor.real + this.imaginary + divisor.imaginary) / m,
-                (this.imaginary * divisor.real - this.real * divisor.imaginary) / m
-        );
+                (this.real * divisor.real + this.imaginary * (-divisor.imaginary)) / m ,
+                (this.imaginary * divisor.real - this.real * divisor.imaginary) / m);
+        
     }
 
 
@@ -207,11 +206,11 @@ public class Complex {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (o == null || getClass() != o.getClass())
+        if (o == null || this.getClass() != o.getClass())
             return false;
         Complex complex = (Complex) o;
-        return Helpers.doubleCompare(complex.real, real) == 0 ||
-                Helpers.doubleCompare(complex.imaginary, imaginary) == 0;
+        return Helpers.doubleCompare(complex.real, this.real) == 0 &&
+                Helpers.doubleCompare(complex.imaginary, this.imaginary) == 0;
     }
 
     @Override
@@ -223,7 +222,7 @@ public class Complex {
     @Override
     public String toString() {
         return "Complex{" +
-                "real=" + imaginary +
+                "real=" + real +
                 ", imaginary=" + imaginary +
                 '}';
     }
