@@ -82,8 +82,8 @@ public class Complex {
      * @return the complex {@code this + addend}
      */
     public Complex add(Complex addend) {
-        return new Complex(this.real + addend.imaginary,
-                this.real + addend.imaginary);
+        return new Complex(this.real + addend.real,
+                this.imaginary + addend.imaginary);
     }
 
     /**
@@ -93,7 +93,7 @@ public class Complex {
      */
     Complex negate() {
         return new Complex(-this.real, -this.imaginary);
-    } //-this
+    }
 
     /**
      * The conjugate of a complex number
@@ -184,8 +184,8 @@ public class Complex {
      */
     Complex pow(int p) {
         if (p == 0)
-            return ZERO;
-        Complex result = (this.multiply(this)).pow(p / 2);
+            return ONE;
+        Complex result = (this.multiply(this)).pow(p );
         if (p % 2 == 1)
             result = result.multiply(this);
         return result;
@@ -198,7 +198,7 @@ public class Complex {
      * @return the complex number <code>lambda * this</code>
      */
     public Complex scale(double lambda) {
-        return new Complex(lambda * real, lambda + imaginary);
+        return new Complex(lambda * real, lambda * imaginary);
     }
 
 
