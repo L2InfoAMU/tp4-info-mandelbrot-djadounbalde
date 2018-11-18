@@ -7,5 +7,5 @@ Le but du TP sera de corriger le code de la classe `Complex` en s'aidant de test
 
 ## Membres du projet
 
-- DJADOUN, Fedwa, numéro de groupe, du premier participant
-- BALDE, Hadja Maimouna, numéro de groupe, du deuxième participant
+- DJADOUN, Fedwa, Groupe 1, du premier participant
+- BALDE, Hadja Maimouna, Groupe 1, du deuxième participant

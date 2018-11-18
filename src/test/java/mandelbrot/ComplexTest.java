@@ -141,8 +141,7 @@ public class ComplexTest {
         Complex c3= new Complex(real, 0);
         assertEquals(c1, c2);
         assertNotEquals(c1,c3);
-
-
     }
+
 
 }
